@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    url: ${wimixplay_datasource_url}
+    username: ${wimixplay_datasource_username}
+    password: ${wimixplay_datasource_password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        allow_update_outside_transaction: true
+        default_batch_fetch_size: 1000
+        query:
+          in_clause_parameter_padding: true
+        jdbc:
+          batch_size: 100
+server:
+  port: 8082
+  servlet:
+    context-path: /scheduler
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+web3:
+  ethereum:
+    rpc-url: ${wimixplay_rpc_url}
+    private-key:  ${wimixplay_rpc_url_private_key}
+    address: ${wimixplay_rpc_url_address}
+    chain-id: 5
+
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
+        sql: DEBUG
+        orm:
+          jdbc:
+            bind: TRACE
+

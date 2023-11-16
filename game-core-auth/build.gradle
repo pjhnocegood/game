@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.game'
+version = 'unspecified'
+
+bootJar {
+    enabled = false
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(platform("org.junit:junit-bom:5.9.1"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    implementation 'software.amazon.awssdk:cognitoidentityprovider:2.20.66'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,68 @@
+spring:
+  data:
+    redis:
+      host: ${wimixplay_redis_host}
+      port: ${wimixplay_redis_port}
+      password: ${wimixplay_redis_password}
+      database: 0
+      timeout: 100000
+  datasource:
+    url: ${wimixplay_datasource_url}
+    username: ${wimixplay_datasource_username}
+    password: ${wimixplay_datasource_password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        allow_update_outside_transaction: true
+        default_batch_fetch_size: 1000
+        query:
+          in_clause_parameter_padding: true
+        jdbc:
+          batch_size: 100
+  rabbitmq:
+    host: ${wimixplay_rabbitmq_host}
+    port: ${wimixplay_rabbitmq_port}
+    username: ${wimixplay_rabbitmq_username}
+    password: ${wimixplay_rabbitmq_password}
+    virtual-host: /
+    ssl:
+      enabled: true
+
+
+rabbitmq:
+    airdrop:
+        request:
+            queue: airdrop.request.queue
+            exchange: airdrop.request.exchange
+            routerKey: airdrop.request.routing.#
+
+server:
+  port: 8080
+  servlet:
+    context-path: /game
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+jwt:
+  secret: ${wimixplay_jwt_secret}
+  token-validity-in-seconds: 86400
+
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
+        sql: DEBUG
+        orm:
+          jdbc:
+            bind: TRACE
+
